@@ -6,10 +6,38 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Telegram API credentials from https://my.telegram.org
-API_ID = int(os.getenv("API_ID", "29448785")
-API_HASH = os.getenv("API_HASH", "599574f6aff0a09ebb76305b58e7e9c2")
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8848069833:AAHt7-sWX6O_fbfidXF6sPdCCOwv61ZmazQ")
+def _env(name, default=""):
+    """Read env var; strips spaces and accidental quotes (common Railway/Heroku paste mistake)."""
+    v = os.getenv(name)
+    if v is None or not v.strip():
+        return default
+    return v.strip().strip('"').strip("'").strip()
+
+
+# ---------------------------------------------------------------------------
+# Telegram API credentials from https://my.telegram.org  ->  API development tools
+# API_ID and API_HASH MUST belong to the SAME app, otherwise Telegram says
+# "API_ID_INVALID - api_id/api_hash combination is invalid".
+# Set them in Railway/Heroku Variables (recommended) OR paste them below.
+# ---------------------------------------------------------------------------
+_DEFAULT_API_ID = "29448785"
+_DEFAULT_API_HASH = "1050dc92ba96ec604133a0e0a5b90279"
+_DEFAULT_BOT_TOKEN = "8848069833:AAHt7-sWX6O_fbfidXF6sPdCCOwv61ZmazQ"
+
+try:
+    API_ID = int(_env("API_ID", _DEFAULT_API_ID))
+except ValueError:
+    raise SystemExit("CONFIG ERROR: API_ID must be only digits (e.g. 12345678), no spaces/letters.")
+API_HASH = _env("API_HASH", _DEFAULT_API_HASH)
+BOT_TOKEN = _env("BOT_TOKEN", _DEFAULT_BOT_TOKEN)
+
+if len(API_HASH) != 32:
+    raise SystemExit(
+        "CONFIG ERROR: API_HASH must be exactly 32 characters (got %d). "
+        "Copy API_ID + API_HASH of the SAME app from https://my.telegram.org" % len(API_HASH)
+    )
+if ":" not in BOT_TOKEN:
+    raise SystemExit("CONFIG ERROR: BOT_TOKEN invalid. Get it from @BotFather.")
 
 # Admin & Owner IDs (comma-separated IDs)
 ADMIN_IDS = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "-1003812209413").split(",") if x.strip()]
