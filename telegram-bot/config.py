@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Telegram API credentials from https://my.telegram.org
-API_ID = int(os.getenv("API_ID", "29448785"))
-API_HASH = os.getenv("API_HASH", "1050dc92ba96ec604133a0e0a5b90279")
+API_ID = int(os.getenv("API_ID", "29448785")
+API_HASH = os.getenv("API_HASH", "599574f6aff0a09ebb76305b58e7e9c2")
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8848069833:AAHt7-sWX6O_fbfidXF6sPdCCOwv61ZmazQ")
 
 # Admin & Owner IDs (comma-separated IDs)
