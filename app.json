@@ -1,0 +1,26 @@
+{
+  "name": "Beta Bot Hub",
+  "description": "TeraBox Telegram bot (secrets come from telegram-bot/config.py defaults or Config Vars)",
+  "repository": "",
+  "stack": "heroku-24",
+  "buildpacks": [{ "url": "heroku/python" }],
+  "formation": { "web": { "quantity": 1, "size": "basic" } },
+  "env": {
+    "PROXY_MODE": "stream",
+    "WEB_SECRET": { "generator": "secret" },
+    "WEB_LINK_TTL_MINUTES": "360",
+    "MAX_SEND_MB": "2000",
+    "MAX_DOWNLOAD_GB": "2.99",
+    "MAX_UPLOAD_MB": "2000",
+    "MAX_PARALLEL_JOBS": "4",
+    "BRAND_NAME": "Beta Bot Hub",
+    "WATERMARK_TEXT": "BETA BOT HUB",
+    "QR_EXPIRY_MINUTES": "10",
+    "MEDIA_AUTO_DELETE_MINUTES": "5",
+    "PAYMENT_POLL_SECONDS": "8",
+    "DB_NAME": "betabothub",
+    "BASE_URL": { "description": "https://YOUR-APP-NAME.herokuapp.com (no trailing slash)", "required": false },
+    "MONGODB_URI": { "description": "MongoDB Atlas URI (recommended - Heroku disk is temporary)", "required": false },
+    "PAYMENT_API_KEY": { "description": "Payment gateway API key", "required": false }
+  }
+}

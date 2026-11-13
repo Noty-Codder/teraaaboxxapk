@@ -1,0 +1,6 @@
+{
+  "name": "Beta Bot Hub - TeraBox Downloader",
+  "description": "Ultra-advanced TeraBox media downloader, offline player manager, link generator, UPI payment approval, and referral system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

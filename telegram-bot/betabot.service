@@ -1,0 +1,15 @@
+[Unit]
+Description=Beta Bot Hub Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/betabot/telegram-bot
+ExecStart=/opt/betabot/telegram-bot/run.sh
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
